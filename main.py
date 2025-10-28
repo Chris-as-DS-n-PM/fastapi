@@ -25,3 +25,4 @@ def api2(name: str):
 @app.post('/apiv3/')
 def api3(data: Details):
     return {'message': data}
+
