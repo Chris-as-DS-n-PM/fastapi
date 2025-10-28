@@ -1,6 +1,11 @@
 from typing import Optional
-
 from fastapi import FastAPI
+from pydantic import BaseModel
+
+class Details(BaseModel):
+    f_name: str
+    l_name: str
+    phone_number: int
 
 app = FastAPI()
 
