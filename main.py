@@ -12,3 +12,16 @@ async def root():
 @app.get("/items/{item_id}")
 def read_item(item_id: int, q: Optional[str] = None):
     return {"item_id": item_id, "q": q}
+
+@app.get('/apiv1/{name}')
+def api1(name: str):
+    return {'message': f'Hello! @{name}'}
+
+
+@app.get('/apiv2/')
+def api2(name: str):
+    return {'message': f'Hello! @{name}'}
+
+@app.post('/apiv3/')
+def api3(data: Details):
+    return {'message': data}
