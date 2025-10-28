@@ -9,10 +9,6 @@ class Details(BaseModel):
 
 app = FastAPI()
 
-@app.post("/login/")
-async def login(username: Annotated[str, Form()], password: Annotated[str, Form()]):
-    return {"username": username}
-    
 @app.get("/")
 async def root():
     return {"message": "Hello World"}
@@ -36,3 +32,6 @@ def api2(name: str):
 def api3(data: Details):
     return {'message': data}
 
+@app.post("/login/")
+async def login(username: Annotated[str, Form()], password: Annotated[str, Form()]):
+    return {"username": username}
