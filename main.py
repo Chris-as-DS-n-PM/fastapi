@@ -15,9 +15,11 @@ async def root():
     return {"message": "Hello World"}
 
 @app.get("/items/{item_id}")
-def read_item(item_id: int, q: Optional[str] = None):
-    return {"item_id": item_id, "q": q}
-
+async def read_item(item_id: str, q: str | None = None):
+    if q:
+        return {"item_id": item_id, "q": q}
+    return {"item_id": item_id}
+    
 @app.get('/apiv1/{name}')
 def api1(name: str):
     return {'message': f'Hello! @{name}'}
