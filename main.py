@@ -1,5 +1,5 @@
 from typing import Optional
-from fastapi import FastAPI
+from fastapi import FastAPI,Form
 from pydantic import BaseModel
 
 class Details(BaseModel):
@@ -9,7 +9,10 @@ class Details(BaseModel):
 
 app = FastAPI()
 
-
+@app.post("/login/")
+async def login(username: Annotated[str, Form()], password: Annotated[str, Form()]):
+    return {"username": username}
+    
 @app.get("/")
 async def root():
     return {"message": "Hello World"}
