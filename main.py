@@ -1,6 +1,9 @@
 from typing import Optional,Annotated
 from fastapi import FastAPI,Form
 from pydantic import BaseModel
+import os
+from mistralai import Mistral
+
 
 class Details(BaseModel):
     f_name: str
@@ -27,6 +30,34 @@ def api1(name: str):
 @app.get('/apiv2/')
 def api2(name: str):
     return {'message': f'Hello! @{name}'}
+
+
+
+@app.get('/cv/')
+def cv(name: str):
+    api_key = os.environ["MISTRAL_API_KEY"] = "NVxzRIL4WK4WNO7d8TrRUDGt7x5kxPj2"
+    model = "mistral-large-latest"
+    client = Mistral(api_key=api_key)
+    messages = [
+        {
+            "role": "user",
+            "content": [
+                {
+                    "type": "text",
+                    "text": "résume les compétences en intelligence artificielle"
+                },
+                {
+                    "type": "document_url",
+                    "document_url": "https://fastapi-3qc2.onrender.com/moncv.pdf"
+                }
+            ]
+        }
+    ]
+    chat_response = client.chat.complete(
+        model=model,
+        messages=messages
+    )
+    return {chat_response}
 
 @app.post('/apiv3/')
 def api3(data: Details):
