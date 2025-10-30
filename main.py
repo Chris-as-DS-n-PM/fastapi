@@ -35,3 +35,17 @@ def api3(data: Details):
 @app.post("/login/")
 async def login(username: Annotated[str, Form()], password: Annotated[str, Form()]):
     return {"username": username}
+
+
+class ModelInput(BaseModel):
+    sepal_length: float
+    sepal_width: float
+    petal_length: float
+    petal_width: float
+
+@app.post("/predict")
+def predict(data: ModelInput):
+    # Exemple simple de "prédiction"
+    score = (data.sepal_length + data.sepal_width + data.petal_length + data.petal_width) / 4
+    return {"prediction": score}
+
