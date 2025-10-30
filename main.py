@@ -35,7 +35,7 @@ def api2(name: str):
 
 @app.get('/cv/')
 def cv(name: str):
-    api_key = os.environ["MISTRAL_API_KEY"] = "NVxzRIL4WK4WNO7d8TrRUDGt7x5kxPj2"
+    api_key= os.environ.get('MISTRAL_API_KEY')
     model = "mistral-large-latest"
     client = Mistral(api_key=api_key)
     messages = [
